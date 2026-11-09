@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JrJophy's Cave</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: #e7e2d5;
+      font: 18px/1.6 system-ui, sans-serif;
+      background:
+        radial-gradient(ellipse at 50% 20%, #47504a 0, transparent 45%),
+        repeating-linear-gradient(90deg, #242721 0 80px, #2b2d26 80px 160px);
+    }
+
+    .cave {
+      min-height: 300vh;
+      padding: 12vh 10vw;
+      position: relative;
+      overflow: clip;
+    }
+
+    .content {
+      width: min(650px, 80%);
+      margin-left: 20%;
+      position: relative;
+      z-index: 1;
+    }
+
+    section {
+      min-height: 75vh;
+      padding: 2rem;
+      margin-bottom: 12vh;
+      background: #171a18dd;
+      border: 4px solid #596052;
+      box-shadow: 10px 10px 0 #111;
+    }
+
+    h1, h2 { color: #a9d477; }
+
+    #player {
+      position: fixed;
+      z-index: 2;
+      left: 7vw;
+      top: 20vh;
+      width: 76px;
+      height: 110px;
+      display: grid;
+      place-items: center;
+      font-size: 64px;
+      filter: drop-shadow(4px 5px 0 #111);
+      will-change: transform;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <div id="player" aria-hidden="true">🧍</div>
+
+  <main class="cave">
+    <div class="content">
+      <section>
+        <h1>⛏️ Welcome to JrJophy's Cave</h1>
+        <p>Hey, I’m JrJophy. Follow the explorer to see what I’m building.</p>
+      </section>
+
+      <section>
+        <h2>🧰 About Me</h2>
+        <p>Add a little about yourself, what you’re learning, and what you enjoy making.</p>
+      </section>
+
+      <section>
+        <h2>📦 My Projects</h2>
+        <p>Link your favorite projects here, like treasure discovered in the cave.</p>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const player = document.querySelector("#player");
+
+    function movePlayer() {
+      const maxScroll = document.documentElement.scrollHeight - innerHeight;
+      const progress = maxScroll > 0 ? scrollY / maxScroll : 0;
+      const distance = document.documentElement.scrollHeight - player.offsetHeight - innerHeight * 0.2;
+      player.style.transform = `translateY(${progress * distance}px)`;
+    }
+
+    addEventListener("scroll", movePlayer, { passive: true });
+    addEventListener("resize", movePlayer);
+    movePlayer();
+  </script>
+</body>
+</html>
